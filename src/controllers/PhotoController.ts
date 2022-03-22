@@ -16,6 +16,20 @@ class PhotoController implements IController {
     const photo = await this.photoService.create(photoPayload);
     res.status(201).json({ data: photo });
   };
+
+  public update: IRequestHandler = async (req, res) => {
+    const photoId = Number(req.params.id);
+    const photoPayload = req.body;
+    try {
+      const photoUpdated = await this.photoService.update(photoId, photoPayload);
+      res.status(200).json({
+        data:photoUpdated,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+    
+  };
 }
 
 export default PhotoController;
